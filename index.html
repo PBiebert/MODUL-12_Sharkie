@@ -4,18 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Document</title>
+    <title>Sharkie</title>
 
     <!-- Embdedding Favicon -->
     <link rel="icon" type="image/png" href="src/favicon/fav.png" />
 
     <!-- Embedding CSS -->
     <link rel="stylesheet" href="src/css/base.css" />
-    <link rel="stylesheet" href="src/css/components/button.css" />
     <link rel="stylesheet" href="src/css/style.css" />
 
     <!-- Embedding JavaScript -->
+    <script src="src/js/classes/movable-object.class.js" defert></script>
+    <script src="src/js/classes/world.class.js" defert></script>
+    <script src="src/js/classes/background-object.class.js" defert></script>
+    <script src="src/js/classes/light.class.js" defert></script>
+    <script src="src/js/classes/character.class.js" defert></script>
+    <script src="src/js/classes/fish.class.js" defert></script>
+
     <script src="src/js/script.js" defer></script>
   </head>
-  <body></body>
+  <body onload="init()">
+    <h1>Sharkie</h1>
+    <canvas id="canvas" width="720px" height="480px"></canvas>
+  </body>
 </html>

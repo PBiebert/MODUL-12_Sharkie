@@ -1,7 +1,7 @@
 /* Fonts einbinden */
 @font-face {
-  font-family: "Oswald";
-  src: url(../fonts/Oswald/Oswald-VariableFont_wght.ttf) format("truetype");
+  font-family: "LuckiestGuy-Regular";
+  src: url(../fonts/Luckiest_Guy/LuckiestGuy-Regular.ttf) format("truetype");
   font-weight: 100 900;
   font-style: normal;
 }
@@ -14,7 +14,7 @@
   --color-fonts: rgb(190, 190, 190, 1);
 
   /* Schriftarten */
-  --font-general: "Oswald";
+  --font-general: "LuckiestGuy-Regular";
 }
 
 /* Grundeinstellungen für alle Elemente */
@@ -33,12 +33,12 @@ html {
 body {
   font-size: 16px; /* nur für Programierung, Später löschen  */
   font-family: var(--font-general), sans-serif, monospace; /* Standartschriftart*/
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
-/* Contentbegrenzung */
-.container {
-  max-width: 1400px;
-  width: 100%;
-  padding: 0 1rem;
-  margin: 0 auto;
+canvas {
+  background-color: black;
 }
