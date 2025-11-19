@@ -10,10 +10,13 @@ class World {
   ];
   canvas;
   ctx;
+  keyboard;
 
-  constructor(canvas) {
+  constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
     this.canvas = canvas;
+    this.keyboard = keyboard;
+    this.setWorld();
     this.draw();
   }
 
@@ -38,6 +41,27 @@ class World {
   }
 
   addToMap(object) {
-    this.ctx.drawImage(object.img, object.x, object.y, object.width, object.height);
+    if (object.otherDirection) {
+      this.ctx.save();
+      this.ctx.translate(object.width, 0);
+      this.ctx.scale(-1, 1);
+      object.x = object.x * -1;
+    }
+    this.ctx.drawImage(
+      object.img,
+      object.x,
+      object.y,
+      object.width,
+      object.height
+    );
+    if (object.otherDirection) {
+      object.x = object.x * -1;
+      this.ctx.restore();
+    }
+  }
+
+  // übergibt die referenz zur world an alle MovableObjects damit auf keybord zugegriffen werden kann
+  setWorld() {
+    this.character.world = this;
   }
 }

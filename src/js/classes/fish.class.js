@@ -16,7 +16,7 @@ class Fish extends MovableObject {
     super().loadImage("src/img/2.Enemy/1.Puffer fish/1.Swim/1.swim1.png");
     this.loadImages(this.IMAGES_SWIMMING);
     this.x = 200 + Math.random() * 500; // Startposition auf der x-Achse
-    this.speedLeft = this.minSpeedLeft + Math.random() * 0.75;
+    this.speed = this.minSpeedLeft + Math.random() * 0.75;
     this.animate();
   }
 

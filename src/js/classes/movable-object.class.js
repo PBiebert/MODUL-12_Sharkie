@@ -5,8 +5,9 @@ class MovableObject {
   width = 100;
   height = 150;
   imageCache = {};
+  otherDirection = false;
   currentImage = 0;
-  speedLeft = 0.2;
+  speed = 0.2;
 
   loadImage(path) {
     this.img = new Image();
@@ -21,13 +22,11 @@ class MovableObject {
     });
   }
 
-  moveRight() {
-    console.log(`rechts`); // Gibt "rechts" in der Konsole aus, wenn die Methode aufgerufen wird
-  }
+  moveRight() {}
 
   moveLeft() {
     setInterval(() => {
-      this.x -= this.speedLeft;
+      this.x -= this.speed;
     }, 1000 / 60); // 1s (1000ms) / 60 entspricht 60 fps
   }
 }
