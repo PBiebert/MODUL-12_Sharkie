@@ -1,16 +1,13 @@
 class World {
   character = new Character(); // Erstellt eine neue Instanz
-  enemies = [new Fish(), new Fish(), new Fish()];
-  lightBeams = [new LightBeam()];
-  backgroundObjects = [
-    new BackgroundObject("src/img/3. Background/Layers/5. Water/D1.png", 0),
-    new BackgroundObject("src/img/3. Background/Layers/4.Fondo 2/D1.png", 0),
-    new BackgroundObject("src/img/3. Background/Layers/3.Fondo 1/D1.png", 0),
-    new BackgroundObject("src/img/3. Background/Layers/2. Floor/D1.png", 0),
-  ];
+  enemies = level1.enemies;
+  lightBeams = level1.lightBeams;
+  backgroundObjects = level1.backgroundObjects;
+
   canvas;
   ctx;
   keyboard;
+  camera_x = 0;
 
   constructor(canvas, keyboard) {
     this.ctx = canvas.getContext("2d");
@@ -23,10 +20,14 @@ class World {
   draw() {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); //Löscht das dargestellte Bild
 
+    this.ctx.translate(this.camera_x, 0);
+
     this.addObjectsToMap(this.backgroundObjects);
     this.addObjectsToMap(this.lightBeams);
     this.addObjectsToMap(this.enemies);
     this.addToMap(this.character);
+
+    this.ctx.translate(-this.camera_x, 0);
 
     let self = this; //rendert die maximale anzahl an Frames die die grafuickarte her gibt
     requestAnimationFrame(() => {

@@ -54,6 +54,8 @@ class Character extends MovableObject {
       } else {
         this.speed = 2;
       }
+
+      this.world.camera_x = -this.x; //!new
     }, 1000 / 60); //60 fps
 
     setInterval(() => {
