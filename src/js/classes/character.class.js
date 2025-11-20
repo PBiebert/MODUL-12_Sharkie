@@ -1,7 +1,7 @@
 class Character extends MovableObject {
   height = 1000 / 4; //Bildgröße durch 4
   width = 815 / 4; //Bildgröße durch 4
-  world; //Referenz auf world um auf keybords zugreifen zu können
+
   IMAGES_STANDING = [
     "src/img/1.Sharkie/1.IDLE/1.png",
     "src/img/1.Sharkie/1.IDLE/2.png",
@@ -41,12 +41,12 @@ class Character extends MovableObject {
     setInterval(() => {
       if (
         this.world.keyboard.RIGHT &&
-        this.x < this.world.level.levelLength - 720
+        this.x < this.world.level.levelLength - 65 - this.width
       ) {
         this.x += this.speed;
         this.otherDirection = false;
       }
-      if (this.world.keyboard.LEFT && this.x > 0) {
+      if (this.world.keyboard.LEFT && this.x > 0 - 40) {
         this.x -= this.speed;
         this.otherDirection = true;
       }
@@ -64,7 +64,16 @@ class Character extends MovableObject {
         this.speed = 2;
       }
 
-      this.world.camera_x = -this.x + 100; //Caracter ist weiter links
+      if (this.x <= 100) {
+        // Sharkie ganz links, Kamera bleibt stehen
+        this.world.camera_x = 0;
+      } else if (this.x < this.world.level.levelLength - 720) {
+        // Kamera folgt Sharkie
+        this.world.camera_x = -this.x + 100;
+      } else {
+        // Sharkie ganz rechts, Kamera bleibt am rechten Rand stehen
+        this.world.camera_x = -(this.world.level.levelLength - 720) + 100;
+      }
     }, 1000 / 60); //60 fps
 
     setInterval(() => {

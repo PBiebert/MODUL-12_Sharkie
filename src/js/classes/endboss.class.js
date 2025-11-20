@@ -18,13 +18,13 @@ class Endboss extends MovableObject {
   ];
 
   y = 0;
+
   minSpeedLeft = 0.25;
 
-  constructor() {
+  constructor(levelLength) {
     super().loadImage(this.IMAGES_SWIMMING[0]);
     this.loadImages(this.IMAGES_SWIMMING);
-    this.x = 500;
-    this.speed = 0 /*this.minSpeedLeft + Math.random() * 0.75*/;
+    this.x = levelLength - 450;
     this.animate();
   }
 

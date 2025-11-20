@@ -7,9 +7,12 @@ class LightBeam extends MovableObject {
   constructor() {
     super().loadImage("src/img/3. Background/Layers/1. Light/1.png");
     this.x = Math.random() * 500;
-    this.moveLeft();
-    // this.animate();
+    this.animate();
   }
 
-  // animate() {}
+  animate() {
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
+  }
 }

@@ -1,5 +1,5 @@
 class MovableObject {
-  x = 120; // Startposition auf der x-Achse
+  x = 100; // Startposition auf der x-Achse
   y = 250; // Startposition auf der y-Achse
   img; // Variable für das Bild des Objekts
   width = 100;
@@ -8,7 +8,8 @@ class MovableObject {
   otherDirection = false;
   currentImage = 0;
   speedImgChange = 100;
-  speed = 0.2;
+  speedLeft = 0.2;
+  world; //Referenz auf world um auf keybords zugreifen zu können
 
   loadImage(path) {
     this.img = new Image();
@@ -23,12 +24,8 @@ class MovableObject {
     });
   }
 
-  moveRight() {}
-
   moveLeft() {
-    setInterval(() => {
-      this.x -= this.speed;
-    }, 1000 / 60); // 1s (1000ms) / 60 entspricht 60 fps
+    this.x -= this.speedLeft;
   }
 
   playAnimation(imageArray) {

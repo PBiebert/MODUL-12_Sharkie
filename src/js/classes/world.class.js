@@ -1,6 +1,6 @@
 class World {
   character = new Character(); // Erstellt eine neue Instanz
-  level = level1;
+  level = level;
 
   canvas;
   ctx;

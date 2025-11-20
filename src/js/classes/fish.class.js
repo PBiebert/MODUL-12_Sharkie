@@ -11,16 +11,20 @@ class Fish extends MovableObject {
 
   minSpeedLeft = 0.25;
 
-  constructor() {
+  constructor(levelLength) {
     super().loadImage(this.IMAGES_SWIMMING[0]);
     this.loadImages(this.IMAGES_SWIMMING);
-    this.x = 200 + Math.random() + 500; // Startposition auf der x-Achse
-    this.speed = this.minSpeedLeft + Math.random() * 0.75;
+    this.x = 720 + levelLength * Math.random(); // Startposition auf der x-Achse
+    this.y = 430 * Math.random();
+    console.log(this.x);
+    this.speedLeft = this.minSpeedLeft + Math.random() * 0.75;
     this.animate();
   }
 
   animate() {
-    this.moveLeft();
+    setInterval(() => {
+      this.moveLeft();
+    }, 1000 / 60);
 
     setInterval(() => {
       this.playAnimation(this.IMAGES_SWIMMING);

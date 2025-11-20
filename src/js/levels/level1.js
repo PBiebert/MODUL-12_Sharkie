@@ -1,9 +1,5 @@
-let level1 = new Level(
-  [new Fish(), new Fish(), new Fish(), new Endboss()],
-  [new LightBeam()],
-  [],
-  0
-);
+let level = new Level([], [], [], 0);
+let levelLength;
 
 let backgroundImagesLevel = [
   "src/img/3. Background/Layers/5. Water/D1.png",
@@ -16,7 +12,10 @@ let backgroundImagesLevel = [
   "src/img/3. Background/Layers/2. Floor/D2.png",
 ];
 
-renderBackground(level1, 2, backgroundImagesLevel);
+renderBackground(level, 5, backgroundImagesLevel);
+setLevelLength();
+renderEnemies(10, GreenFish);
+setEndboss();
 
 function renderBackground(level, backgroundRepeats, backgroundImages) {
   let repeats = backgroundRepeats;
@@ -38,5 +37,19 @@ function renderBackground(level, backgroundRepeats, backgroundImages) {
     );
     insertPosition += 1440;
   }
-  level.levelLength = insertPosition;
+  levelLength = insertPosition;
+}
+
+function setLevelLength() {
+  level.levelLength = levelLength;
+}
+
+function renderEnemies(sumEnemies, enemySpecies) {
+  for (let i = 0; i < sumEnemies; i++) {
+    level.enemies.push(new enemySpecies(levelLength));
+  }
+}
+
+function setEndboss() {
+  level.enemies.push(new Endboss(levelLength));
 }
