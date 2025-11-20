@@ -15,6 +15,8 @@ let backgroundImagesLevel = [
 renderBackground(level, 5, backgroundImagesLevel);
 setLevelLength();
 renderEnemies(10, GreenFish);
+renderEnemies(10, PinkFish);
+renderEnemies(10, RedFish);
 setEndboss();
 
 function renderBackground(level, backgroundRepeats, backgroundImages) {
