@@ -24,10 +24,9 @@ class Character extends MovableObject {
   ];
 
   speed = 2;
-  static speedImgChange = 100;
 
   constructor() {
-    super().loadImage("src/img/1.Sharkie/1.IDLE/1.png");
+    super().loadImage(this.IMAGES_STANDING[0]);
     // wenn Super.loadImage einmal aufgerufenb wurde kann man via this drauf zureifen und hier das Array für die funktion LoadImages reingeben
     this.loadImages(this.IMAGES_STANDING);
 
@@ -35,18 +34,28 @@ class Character extends MovableObject {
   }
   animate() {
     setInterval(() => {
-      if (this.world.keyboard.RIGHT) {
+      console.log("X = " + this.x);
+      console.log("Y = " + this.y);
+    }, 2000);
+
+    setInterval(() => {
+      if (
+        this.world.keyboard.RIGHT &&
+        this.x < this.world.level.levelLength - 720
+      ) {
         this.x += this.speed;
         this.otherDirection = false;
       }
-      if (this.world.keyboard.LEFT) {
+      if (this.world.keyboard.LEFT && this.x > 0) {
         this.x -= this.speed;
         this.otherDirection = true;
       }
-      if (this.world.keyboard.UP) {
+      if (this.world.keyboard.UP && this.y > 0 - this.height / 2 + 10) {
+        // canvas start - halbe characterHöhe + Transparenzen
         this.y -= this.speed;
       }
-      if (this.world.keyboard.DOWN) {
+      if (this.world.keyboard.DOWN && this.y < 480 - this.height + 55) {
+        // canvas end - characterHöhe + Transparenzen
         this.y += this.speed;
       }
       if (this.world.keyboard.SPACE) {
@@ -55,15 +64,12 @@ class Character extends MovableObject {
         this.speed = 2;
       }
 
-      this.world.camera_x = -this.x; //!new
+      this.world.camera_x = -this.x + 100; //Caracter ist weiter links
     }, 1000 / 60); //60 fps
 
     setInterval(() => {
-      let i = this.currentImage % this.IMAGES_STANDING.length;
-      let path = this.IMAGES_STANDING[i];
-      this.img = this.imageCache[path];
-      this.currentImage++;
-    }, Character.speedImgChange);
+      this.playAnimation(this.IMAGES_STANDING);
+    }, this.speedImgChange);
   }
 
   jump() {}

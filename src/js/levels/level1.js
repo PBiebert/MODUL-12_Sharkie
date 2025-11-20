@@ -1,5 +1,5 @@
 let level1 = new Level(
-  [new Fish(), new Fish(), new Fish()],
+  [new Fish(), new Fish(), new Fish(), new Endboss()],
   [new LightBeam()],
   [],
   0
@@ -16,11 +16,11 @@ let backgroundImagesLevel = [
   "src/img/3. Background/Layers/2. Floor/D2.png",
 ];
 
-renderBackground(level1, 5, backgroundImagesLevel);
+renderBackground(level1, 2, backgroundImagesLevel);
 
 function renderBackground(level, backgroundRepeats, backgroundImages) {
   let repeats = backgroundRepeats;
-  let insertPosition = 0;
+  let insertPosition = -100;
 
   for (let i = 0; i < repeats; i++) {
     level.backgroundObjects.push(

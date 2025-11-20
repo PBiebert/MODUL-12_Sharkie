@@ -1,8 +1,6 @@
 class World {
   character = new Character(); // Erstellt eine neue Instanz
-  enemies = level1.enemies;
-  lightBeams = level1.lightBeams;
-  backgroundObjects = level1.backgroundObjects;
+  level = level1;
 
   canvas;
   ctx;
@@ -22,9 +20,9 @@ class World {
 
     this.ctx.translate(this.camera_x, 0);
 
-    this.addObjectsToMap(this.backgroundObjects);
-    this.addObjectsToMap(this.lightBeams);
-    this.addObjectsToMap(this.enemies);
+    this.addObjectsToMap(this.level.backgroundObjects);
+    this.addObjectsToMap(this.level.lightBeams);
+    this.addObjectsToMap(this.level.enemies);
     this.addToMap(this.character);
 
     this.ctx.translate(-this.camera_x, 0);
