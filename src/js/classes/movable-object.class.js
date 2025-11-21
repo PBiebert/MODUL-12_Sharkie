@@ -2,6 +2,10 @@ class MovableObject {
   x = 100; // Startposition auf der x-Achse
   y = 250; // Startposition auf der y-Achse
   img; // Variable für das Bild des Objekts
+  imgBottom;
+  imgTop;
+  imgLeft;
+  imgRight;
   width = 100;
   height = 150;
   imageCache = {};
@@ -31,6 +35,26 @@ class MovableObject {
     });
   }
 
+  draw(ctx) {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+
+  //Hitbox erstellen
+  drawFrame(ctx) {
+    if (
+      this instanceof Character ||
+      this instanceof Fish ||
+      this instanceof JellyFish ||
+      this instanceof Endboss
+    ) {
+      ctx.beginPath();
+      ctx.lineWidth = "1";
+      ctx.strokeStyle = "black";
+      ctx.rect(this.x, this.y, this.width, this.height);
+      ctx.stroke();
+    }
+  }
+
   moveRight() {
     this.x += this.speedX;
   }
@@ -41,7 +65,7 @@ class MovableObject {
 
   moveUp() {
     this.speedY = this.speedDefault;
-    if (this.y <= 0 - (this.height / 2 + 10)) {
+    if (this.y <= 0 - this.imgTop) {
       this.speedY = 0;
     }
   }
@@ -77,6 +101,6 @@ class MovableObject {
   }
 
   isAboveGround() {
-    return this.y < 480 - this.height + 55;
+    return this.y < 480 - this.imgBottom;
   }
 }

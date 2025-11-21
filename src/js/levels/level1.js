@@ -12,15 +12,15 @@ let backgroundImagesLevel = [
   "src/img/3. Background/Layers/2. Floor/D2.png",
 ];
 
-renderBackground(level, 3, backgroundImagesLevel);
+renderBackground(level, 1, backgroundImagesLevel);
 setLevelLength();
-renderEnemies(5, GreenFish);
-renderEnemies(7, PinkFish);
-renderEnemies(4, RedFish);
-renderEnemies(3, JellyFishGreen);
-renderEnemies(6, JellyFishLila);
-renderEnemies(3, JellyFishPink);
-renderEnemies(6, JellyFishYellow);
+renderEnemies(1, GreenFish);
+renderEnemies(1, PinkFish);
+renderEnemies(1, RedFish);
+renderEnemies(1, JellyFishGreen);
+renderEnemies(1, JellyFishLila);
+renderEnemies(1, JellyFishPink);
+renderEnemies(1, JellyFishYellow);
 setEndboss();
 
 function renderBackground(level, backgroundRepeats, backgroundImages) {

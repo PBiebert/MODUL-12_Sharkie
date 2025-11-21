@@ -1,6 +1,10 @@
 class Character extends MovableObject {
   height = 1000 / 4; //Bildgröße durch 4
   width = 815 / 4; //Bildgröße durch 4
+  imgBottom = this.height - 50;
+  imgTop = this.height / 2 - 10;
+  imgLeft = -35;
+  imgRight = this.width;
 
   IMAGES_STANDING = [
     "src/img/1.Sharkie/1.IDLE/1.png",
@@ -26,7 +30,8 @@ class Character extends MovableObject {
   constructor() {
     super().loadImage(this.IMAGES_STANDING[0]);
     this.loadImages(this.IMAGES_STANDING);
-    this.y = 480 - this.height + 55;
+    this.y = 480 - this.imgBottom;
+    console.log(this.imgBottom);
     this.applyGravity();
     this.animate();
   }
@@ -50,19 +55,19 @@ class Character extends MovableObject {
   checkMovementKeys() {
     if (
       this.world.keyboard.RIGHT &&
-      this.x < this.world.level.levelLength - 65 - this.width
+      this.x < this.world.level.levelLength - this.imgRight - 70
     ) {
       this.moveRight();
       this.otherDirection = false;
     }
-    if (this.world.keyboard.LEFT && this.x > 0 - 40) {
+    if (this.world.keyboard.LEFT && this.x > 0 + this.imgLeft) {
       this.moveLeft();
       this.otherDirection = true;
     }
     if (this.world.keyboard.UP) {
       this.moveUp();
     }
-    if (this.world.keyboard.DOWN && this.y < 480 - this.height + 55) {
+    if (this.world.keyboard.DOWN && this.y < 480 - this.imgBottom) {
       this.moveDown();
     }
   }
