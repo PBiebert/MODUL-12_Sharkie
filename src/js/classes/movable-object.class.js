@@ -8,9 +8,15 @@ class MovableObject {
   otherDirection = false;
   currentImage = 0;
   speedImgChange = 100;
-  speedLeft = 0.2;
-  world; //Referenz auf world um auf keybords zugreifen zu können
+  world;
   moveUpDownToggle = true;
+  speedDefault = 2;
+  speedBoost = 4;
+  speedX = 2;
+  speedY = 0;
+  minSpeedLeft = 0.25;
+  graphiteValue = 0.15;
+  graphiteSpeed = 60;
 
   loadImage(path) {
     this.img = new Image();
@@ -25,21 +31,31 @@ class MovableObject {
     });
   }
 
-  moveLeft() {
-    this.x -= this.speedLeft;
+  moveRight() {
+    this.x += this.speedX;
   }
 
-  moveUpAndDown() {
-    if (this.moveUpDownToggle) {
-      this.y -= 1;
-      if (this.y <= -10) {
-        this.moveUpDownToggle = false;
-      }
+  moveLeft() {
+    this.x -= this.speedX;
+  }
+
+  moveUp() {
+    this.speedY = this.speedDefault;
+    if (this.y <= 0 - (this.height / 2 + 10)) {
+      this.speedY = 0;
+    }
+  }
+
+  moveDown() {
+    this.y += this.speedX;
+    this.speedY = 0;
+  }
+
+  sprint() {
+    if (this.world.keyboard.SPACE) {
+      this.speedX = this.speedBoost;
     } else {
-      this.y += 1;
-      if (this.y >= 480 - this.height + 10) {
-        this.moveUpDownToggle = true;
-      }
+      this.speedX = this.speedDefault;
     }
   }
 
@@ -48,5 +64,19 @@ class MovableObject {
     let path = imageArray[i];
     this.img = this.imageCache[path];
     this.currentImage++;
+  }
+
+  applyGravity() {
+    setInterval(() => {
+      if (this.isAboveGround() || this.speedY > 0) {
+        this.y -= this.speedY;
+        this.speedY -= this.graphiteValue;
+      }
+    }, 1000 / this.graphiteSpeed);
+    console.log(this.speedY);
+  }
+
+  isAboveGround() {
+    return this.y < 480 - this.height + 55;
   }
 }

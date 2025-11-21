@@ -3,6 +3,7 @@ class Fish extends MovableObject {
   height = 198 / 3; //Bildgröße durch 2
   IMAGES_SWIMMING;
 
+  speedX = 0.2;
   minSpeedLeft = 0.25;
 
   constructor(levelLength, IMAGES_SWIMMING) {
@@ -11,7 +12,7 @@ class Fish extends MovableObject {
     this.IMAGES_SWIMMING = IMAGES_SWIMMING;
     this.x = 720 + levelLength * Math.random(); // Startposition auf der x-Achse
     this.y = 430 * Math.random();
-    this.speedLeft = this.minSpeedLeft + Math.random() * 0.75;
+    this.speedX = this.minSpeedLeft + Math.random() * 0.75;
     this.animate();
   }
 

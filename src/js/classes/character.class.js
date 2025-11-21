@@ -23,13 +23,11 @@ class Character extends MovableObject {
     "src/img/1.Sharkie/1.IDLE/18.png",
   ];
 
-  speed = 2;
-
   constructor() {
     super().loadImage(this.IMAGES_STANDING[0]);
-    // wenn Super.loadImage einmal aufgerufenb wurde kann man via this drauf zureifen und hier das Array für die funktion LoadImages reingeben
     this.loadImages(this.IMAGES_STANDING);
-
+    this.y = 480 - this.height + 55;
+    this.applyGravity();
     this.animate();
   }
   animate() {
@@ -39,36 +37,9 @@ class Character extends MovableObject {
     }, 2000);
 
     setInterval(() => {
-      if (
-        this.world.keyboard.RIGHT &&
-        this.x < this.world.level.levelLength - 65 - this.width
-      ) {
-        this.x += this.speed;
-        this.otherDirection = false;
-      }
-      if (this.world.keyboard.LEFT && this.x > 0 - 40) {
-        this.x -= this.speed;
-        this.otherDirection = true;
-      }
-      if (this.world.keyboard.UP && this.y > 0 - this.height / 2 + 10) {
-        this.y -= this.speed;
-      }
-      if (this.world.keyboard.DOWN && this.y < 480 - this.height + 55) {
-        this.y += this.speed;
-      }
-      if (this.world.keyboard.SPACE) {
-        this.speed = 20;
-      } else {
-        this.speed = 2;
-      }
-
-      if (this.x <= 100) {
-        this.world.camera_x = 0;
-      } else if (this.x < this.world.level.levelLength - 720) {
-        this.world.camera_x = -this.x + 100;
-      } else {
-        this.world.camera_x = -(this.world.level.levelLength - 720) + 100;
-      }
+      this.checkMovementKeys();
+      this.sprint();
+      this.updateCameraPosition();
     }, 1000 / 60); //60 fps
 
     setInterval(() => {
@@ -76,5 +47,33 @@ class Character extends MovableObject {
     }, this.speedImgChange);
   }
 
-  jump() {}
+  checkMovementKeys() {
+    if (
+      this.world.keyboard.RIGHT &&
+      this.x < this.world.level.levelLength - 65 - this.width
+    ) {
+      this.moveRight();
+      this.otherDirection = false;
+    }
+    if (this.world.keyboard.LEFT && this.x > 0 - 40) {
+      this.moveLeft();
+      this.otherDirection = true;
+    }
+    if (this.world.keyboard.UP) {
+      this.moveUp();
+    }
+    if (this.world.keyboard.DOWN && this.y < 480 - this.height + 55) {
+      this.moveDown();
+    }
+  }
+
+  updateCameraPosition() {
+    if (this.x <= 100) {
+      this.world.camera_x = 0;
+    } else if (this.x < this.world.level.levelLength - 720) {
+      this.world.camera_x = -this.x + 100;
+    } else {
+      this.world.camera_x = -(this.world.level.levelLength - 720) + 100;
+    }
+  }
 }

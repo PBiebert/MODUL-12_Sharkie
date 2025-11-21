@@ -2,6 +2,7 @@ class JellyFish extends MovableObject {
   width = 211 / 2;
   height = 300 / 2;
   IMAGES_SWIMMING;
+  speedY = 1;
 
   constructor(levelLength, IMAGES_SWIMMING) {
     super().loadImage(IMAGES_SWIMMING[0]);
@@ -9,6 +10,7 @@ class JellyFish extends MovableObject {
     this.IMAGES_SWIMMING = IMAGES_SWIMMING;
     this.x = 720 + Math.random() * (levelLength - 2 * 720); // Bereich: 720 bis levelLength-720
     this.y = 430 * Math.random();
+    this.speedY = this.minSpeedLeft + Math.random() * 0.75;
 
     this.animate();
   }
@@ -21,5 +23,19 @@ class JellyFish extends MovableObject {
     setInterval(() => {
       this.playAnimation(this.IMAGES_SWIMMING);
     }, this.speedImgChange);
+  }
+
+  moveUpAndDown() {
+    if (this.moveUpDownToggle) {
+      this.y -= this.speedY;
+      if (this.y <= -10) {
+        this.moveUpDownToggle = false;
+      }
+    } else {
+      this.y += this.speedY;
+      if (this.y >= 480 - this.height + 10) {
+        this.moveUpDownToggle = true;
+      }
+    }
   }
 }

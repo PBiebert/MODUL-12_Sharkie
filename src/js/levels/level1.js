@@ -12,7 +12,7 @@ let backgroundImagesLevel = [
   "src/img/3. Background/Layers/2. Floor/D2.png",
 ];
 
-renderBackground(level, 5, backgroundImagesLevel);
+renderBackground(level, 3, backgroundImagesLevel);
 setLevelLength();
 renderEnemies(5, GreenFish);
 renderEnemies(7, PinkFish);
