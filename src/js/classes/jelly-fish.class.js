@@ -1,23 +1,21 @@
-class Fish extends MovableObject {
-  width = 241 / 3; //Bildgröße durch 2
-  height = 198 / 3; //Bildgröße durch 2
+class JellyFish extends MovableObject {
+  width = 211 / 2;
+  height = 300 / 2;
   IMAGES_SWIMMING;
-
-  minSpeedLeft = 0.25;
 
   constructor(levelLength, IMAGES_SWIMMING) {
     super().loadImage(IMAGES_SWIMMING[0]);
     this.loadImages(IMAGES_SWIMMING);
     this.IMAGES_SWIMMING = IMAGES_SWIMMING;
-    this.x = 720 + levelLength * Math.random(); // Startposition auf der x-Achse
+    this.x = 720 + Math.random() * (levelLength - 2 * 720); // Bereich: 720 bis levelLength-720
     this.y = 430 * Math.random();
-    this.speedLeft = this.minSpeedLeft + Math.random() * 0.75;
+
     this.animate();
   }
 
   animate() {
     setInterval(() => {
-      this.moveLeft();
+      this.moveUpAndDown();
     }, 1000 / 60);
 
     setInterval(() => {

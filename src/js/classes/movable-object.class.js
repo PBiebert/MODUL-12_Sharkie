@@ -10,6 +10,7 @@ class MovableObject {
   speedImgChange = 100;
   speedLeft = 0.2;
   world; //Referenz auf world um auf keybords zugreifen zu können
+  moveUpDownToggle = true;
 
   loadImage(path) {
     this.img = new Image();
@@ -26,6 +27,20 @@ class MovableObject {
 
   moveLeft() {
     this.x -= this.speedLeft;
+  }
+
+  moveUpAndDown() {
+    if (this.moveUpDownToggle) {
+      this.y -= 1;
+      if (this.y <= -10) {
+        this.moveUpDownToggle = false;
+      }
+    } else {
+      this.y += 1;
+      if (this.y >= 480 - this.height + 10) {
+        this.moveUpDownToggle = true;
+      }
+    }
   }
 
   playAnimation(imageArray) {

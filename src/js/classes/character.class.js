@@ -51,27 +51,22 @@ class Character extends MovableObject {
         this.otherDirection = true;
       }
       if (this.world.keyboard.UP && this.y > 0 - this.height / 2 + 10) {
-        // canvas start - halbe characterHöhe + Transparenzen
         this.y -= this.speed;
       }
       if (this.world.keyboard.DOWN && this.y < 480 - this.height + 55) {
-        // canvas end - characterHöhe + Transparenzen
         this.y += this.speed;
       }
       if (this.world.keyboard.SPACE) {
-        this.speed = 4;
+        this.speed = 20;
       } else {
         this.speed = 2;
       }
 
       if (this.x <= 100) {
-        // Sharkie ganz links, Kamera bleibt stehen
         this.world.camera_x = 0;
       } else if (this.x < this.world.level.levelLength - 720) {
-        // Kamera folgt Sharkie
         this.world.camera_x = -this.x + 100;
       } else {
-        // Sharkie ganz rechts, Kamera bleibt am rechten Rand stehen
         this.world.camera_x = -(this.world.level.levelLength - 720) + 100;
       }
     }, 1000 / 60); //60 fps
